@@ -17,7 +17,7 @@ class Item extends Component {
                 <td className="text-center">1</td>
                 <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
                 <td className="text-center">
-                    <span className="label label-default">Small</span>
+                    <span className="label label-default">Smalls</span>
                 </td>
                 <td>
                     <button type="button" className="btn btn-warning">Edit</button>
