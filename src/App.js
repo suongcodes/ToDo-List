@@ -3,7 +3,8 @@ import Title from './components/Title';
 import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
-import items from './Mock/task';
+
+import tasks from './Mock/task';
 
 
 
@@ -13,7 +14,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            items:items
+            items:tasks
         };
     }
 
@@ -21,8 +22,6 @@ class App extends Component {
 
     render() {
         let items = this.state.items;
-        console.log(items);
-
         return (
                 <div className="row">
                     <Title></Title>

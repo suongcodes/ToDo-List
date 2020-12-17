@@ -12,12 +12,15 @@ class Item extends Component {
 
 
     render() {
+        const {item} = this.props ;
+        const index = this.props.index;
+
         return (
             <tr>
-                <td className="text-center">1</td>
-                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ea c</td>
+                <td className="text-center">{index+1}</td>  
+                <td>{item.name}</td>
                 <td className="text-center">
-                    <span className="label label-default">Smalls</span>
+                  {this.showElementLevel(item.level)}
                 </td>
                 <td>
                     <button type="button" className="btn btn-warning">Edit</button>
@@ -25,6 +28,16 @@ class Item extends Component {
                 </td>
         </tr>
         );
+    }
+    showElementLevel(level){
+        let elmLevel = <span className="label label-default">Smalls</span> ;
+        if(level === 1){
+            elmLevel = <span className="label label-info">Mdium</span>;
+        }else if(level === 2){
+            elmLevel = <span className="label label-danger">High</span>;
+        }
+     return elmLevel;
+
     }
 }
 

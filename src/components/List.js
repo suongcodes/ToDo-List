@@ -10,7 +10,6 @@ class List extends Component {
         this.state = {
       
         };
-        console.log(this.props.items);
     }
 
 
@@ -18,7 +17,7 @@ class List extends Component {
         const items = this.props.items;
         const elmItem = items.map((item,index)=>{
             return (
-                <Item key={index} />
+                <Item key={index} item={item} index={index} />
             );
         });
 
