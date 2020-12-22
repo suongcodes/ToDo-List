@@ -12,13 +12,14 @@ class Control extends Component {
       
         };
         this.handleAdd=this.handleAdd.bind(this);
+
+        //props.onClickSearchGo
     }
     handleAdd(){
        this.props.onClickAdd();
     }
 
     render() {
-        console.log(this.props.isShowfForm);
         let elmButton =  <button onClick={this.handleAdd} type="button" className="btn btn-info btn-block">Thêm Công Việc</button> ;
         if(this.props.isShowfForm === true){
             elmButton =<button onClick={this.handleAdd} type="button" className="btn btn-success btn-block">Đóng</button>;
@@ -27,7 +28,7 @@ class Control extends Component {
                
             <div className="row">
             {/* SEARCH : START */}
-            <Search> </Search>
+            <Search onClickGo={this.props.onClickSearchGo}> </Search>
             {/* SEARCH : END */}
             
             {/* SORT : START */}

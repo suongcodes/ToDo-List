@@ -15,23 +15,38 @@ class App extends Component {
 
         this.state = {
             items:tasks,
-            isShowForm:false
+            isShowForm:false,
+            stringSearch:''
         };
         this.handleToggleForm=this.handleToggleForm.bind(this);
+        this.closeForm=this.closeForm.bind(this);
+        this.handleSearch=this.handleSearch.bind(this);
     }
     handleToggleForm(){
         this.setState({
             isShowForm:!this.state.isShowForm
         });
     }
- 
+
+    handleSearch(value){
+        this.setState({
+            stringSearch:value
+        });
+    }
+
+    closeForm(){
+        this.setState({
+            isShowForm:false,
+            stringSearch:''
+        });
+    }
 
     render() {
         let items = this.state.items;
         let isShowfForm = this.state.isShowForm;
         let elementForm = null;
         if(isShowfForm){
-            elementForm = <Form/>;
+            elementForm = <Form onClickCancel={this.closeForm}/>;
         }
         return (
                 <div className="row">
@@ -39,6 +54,7 @@ class App extends Component {
                 
                  {/* CONTROL (SEARCH + SORT + ADD) : END */}
                     <Control 
+                    OnClickSearchGo={this.handleSearch}
                     onClickAdd={this.handleToggleForm} 
                     isShowfForm={isShowfForm}
                     />
