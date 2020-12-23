@@ -42,6 +42,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.state.stringSearch);
         let items = this.state.items;
         let isShowfForm = this.state.isShowForm;
         let elementForm = null;
@@ -54,7 +55,7 @@ class App extends Component {
                 
                  {/* CONTROL (SEARCH + SORT + ADD) : END */}
                     <Control 
-                    OnClickSearchGo={this.handleSearch}
+                    onClickSearchGo={this.handleSearch}
                     onClickAdd={this.handleToggleForm} 
                     isShowfForm={isShowfForm}
                     />
