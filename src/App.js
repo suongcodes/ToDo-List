@@ -3,6 +3,7 @@ import Title from './components/Title';
 import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
+import {filter,includes} from 'lodash';
 
 import tasks from './Mock/task';
 
@@ -42,13 +43,31 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state.stringSearch);
-        let items = this.state.items;
+        console.log('StringSearch:', this.state.stringSearch);
+        let itemsOrigin = this.state.items;
+        let items =[];
         let isShowfForm = this.state.isShowForm;
         let elementForm = null;
+        const search = this.state.stringSearch;
+
+        items= filter(itemsOrigin,(item) => {
+            return includes(item.name,search)
+        });
+
+        // if(search.length >0){
+        //     itemsOrigin.forEach((item) => {
+        //         if(item.name.toLowerCase().indexOf(search) !== -1){
+        //             items.push(item);
+        //         }
+        //     });
+        // }else{
+        //     items = itemsOrigin;
+        // }
+
         if(isShowfForm){
             elementForm = <Form onClickCancel={this.closeForm}/>;
         }
+        
         return (
                 <div className="row">
                     <Title></Title>
