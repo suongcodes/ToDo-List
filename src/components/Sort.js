@@ -9,9 +9,13 @@ class Sort extends Component {
       
         };
     }
-
+    handleSort(orderBy,orderDir){
+        console.log(orderBy +'-'+orderDir);
+    }
 
     render() {
+        let {orderBy, orderDir} =this.props;
+        let strSort = orderBy +"-"+ orderDir;
         return (
         <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <div className="dropdown">
@@ -21,20 +25,20 @@ class Sort extends Component {
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li>
-                        <a role="button">Name ASC</a>
+                        <a onClick={()=>this.handleSort('name','asc')} role="button">Name ASC</a>
                     </li>
                     <li>
-                        <a role="button">Name DESC</a>
+                        <a onClick={()=>this.handleSort('name','desc')} role="button">Name DESC</a>
                     </li>
                     <li role="separator" className="divider" />
                     <li>
-                        <a role="button">Level ASC</a>
+                        <a onClick={()=>this.handleSort('Level','ASC')} role="button">Level ASC</a>
                     </li>
                     <li>
-                        <a role="button">Level DESC</a>
+                        <a onClick={()=>this.handleSort('Level','DESC')} role="button">Level DESC</a>
                     </li>
                 </ul>
-                <span className="label label-success label-medium">NAME - DESC</span>
+                <span className="label label-success label-medium">{strSort}</span>
             </div>
         </div>
         );

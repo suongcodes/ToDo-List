@@ -35,7 +35,7 @@ class List extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                        {elmItem}
+                        {elmItem} 
                 </tbody>
             </table>
         </div>

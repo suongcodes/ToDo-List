@@ -26,6 +26,7 @@ class Search extends Component {
     handleChange(event){
         this.setState({stringSearch: event.target.value});
     }
+    
     render() {
         return (
         <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">

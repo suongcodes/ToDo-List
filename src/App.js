@@ -15,9 +15,11 @@ class App extends Component {
         super(props);
 
         this.state = {
-            items:tasks,
-            isShowForm:false,
-            stringSearch:''
+            items           : tasks,
+            isShowForm      : false,
+            stringSearch    : '',
+            orderBy         : 'name',
+            orderDir         :'desc'
         };
         this.handleToggleForm=this.handleToggleForm.bind(this);
         this.closeForm=this.closeForm.bind(this);
@@ -34,7 +36,6 @@ class App extends Component {
             stringSearch:value
         });
     }
-
     closeForm(){
         this.setState({
             isShowForm:false,
@@ -43,15 +44,16 @@ class App extends Component {
     }
 
     render() {
-        console.log('StringSearch:', this.state.stringSearch);
-        let itemsOrigin = this.state.items;
+        let itemsOrigin = [...this.state.items];
         let items =[];
         let isShowfForm = this.state.isShowForm;
         let elementForm = null;
-        const search = this.state.stringSearch;
+        let {orderBy, orderDir,stringSearch} =this.state;
+
+        console.log(orderBy +"-"+orderDir);
 
         items= filter(itemsOrigin,(item) => {
-            return includes(item.name,search)
+            return includes(item.name.toLowerCase(),stringSearch.toLowerCase())
         });
 
         // if(search.length >0){
@@ -74,6 +76,8 @@ class App extends Component {
                 
                  {/* CONTROL (SEARCH + SORT + ADD) : END */}
                     <Control 
+                    orderBy={orderBy}
+                    orderDir={orderDir}
                     onClickSearchGo={this.handleSearch}
                     onClickAdd={this.handleToggleForm} 
                     isShowfForm={isShowfForm}

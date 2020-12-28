@@ -20,6 +20,8 @@ class Control extends Component {
     }
 
     render() {
+        let {orderBy, orderDir} =this.props;
+
         let elmButton =  <button onClick={this.handleAdd} type="button" className="btn btn-info btn-block">Thêm Công Việc</button> ;
         if(this.props.isShowfForm === true){
             elmButton =<button onClick={this.handleAdd} type="button" className="btn btn-success btn-block">Đóng</button>;
@@ -32,7 +34,10 @@ class Control extends Component {
             {/* SEARCH : END */}
             
             {/* SORT : START */}
-            <Sort></Sort>
+            <Sort   orderBy={orderBy}
+                    orderDir={orderDir}>
+
+                    </Sort>
             {/* SORT : END */}
             
             {/* ADD : START */}
