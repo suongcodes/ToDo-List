@@ -34,9 +34,10 @@ class Control extends Component {
             {/* SEARCH : END */}
             
             {/* SORT : START */}
-            <Sort   orderBy={orderBy}
+            <Sort   onClickSort={this.props.onClickSort}
+                    orderBy={orderBy}
                     orderDir={orderDir}>
-
+                    
                     </Sort>
             {/* SORT : END */}
             

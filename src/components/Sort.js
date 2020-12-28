@@ -8,9 +8,13 @@ class Sort extends Component {
         this.state = {
       
         };
+
+        this.handleSort=this.handleSort.bind(this);
+
     }
     handleSort(orderBy,orderDir){
         console.log(orderBy +'-'+orderDir);
+        this.props.onClickSort(orderBy, orderDir);
     }
 
     render() {

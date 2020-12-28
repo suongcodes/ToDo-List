@@ -24,7 +24,15 @@ class App extends Component {
         this.handleToggleForm=this.handleToggleForm.bind(this);
         this.closeForm=this.closeForm.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
+        this.handleSort=this.handleSort.bind(this);
     }
+    handleSort(orderBy,orderDir){
+        this.setState({
+            orderBy: orderBy,
+            orderDir:orderDir
+        });
+    }
+
     handleToggleForm(){
         this.setState({
             isShowForm:!this.state.isShowForm
@@ -42,7 +50,7 @@ class App extends Component {
             stringSearch:''
         });
     }
-
+    
     render() {
         let itemsOrigin = [...this.state.items];
         let items =[];
@@ -81,6 +89,7 @@ class App extends Component {
                     onClickSearchGo={this.handleSearch}
                     onClickAdd={this.handleToggleForm} 
                     isShowfForm={isShowfForm}
+                    onClickSort={this.handleSort}
                     />
                 {/* CONTROL (SEARCH + SORT + ADD) : END */}
 
