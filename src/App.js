@@ -3,7 +3,7 @@ import Title from './components/Title';
 import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
-import {filter,includes} from 'lodash';
+import {filter,includes,orderBy as funcOrderBy} from 'lodash';
 
 import tasks from './Mock/task';
 
@@ -58,8 +58,7 @@ class App extends Component {
         let elementForm = null;
         let {orderBy, orderDir,stringSearch} =this.state;
 
-        console.log(orderBy +"-"+orderDir);
-
+        //Search
         items= filter(itemsOrigin,(item) => {
             return includes(item.name.toLowerCase(),stringSearch.toLowerCase())
         });
@@ -73,6 +72,10 @@ class App extends Component {
         // }else{
         //     items = itemsOrigin;
         // }
+
+        // Sort
+        items= funcOrderBy(items, [orderBy],[orderDir]);
+
 
         if(isShowfForm){
             elementForm = <Form onClickCancel={this.closeForm}/>;
