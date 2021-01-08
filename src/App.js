@@ -27,6 +27,11 @@ class App extends Component {
         this.handleSort=this.handleSort.bind(this);
         this.handleDelete=this.handleDelete.bind(this);
     }
+    handleSubmit(item){
+        console.log(item);
+    }
+
+
     handleDelete(id){
         console.log(id);
         let items = remove(this.state.items, (item)=>{
@@ -89,7 +94,7 @@ class App extends Component {
 
 
         if(isShowfForm){
-            elementForm = <Form onClickCancel={this.closeForm}/>;
+            elementForm = <Form onClickSubmit={this.handleSubmit} onClickCancel={this.closeForm}/>;
         }
         
         return (
