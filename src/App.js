@@ -18,27 +18,38 @@ class App extends Component {
             isShowForm      : false,
             stringSearch    : '',
             orderBy         : 'name',
-            orderDir         :'desc'
+            orderDir        :'desc',
+            itemSelected    : null
         };
         this.handleToggleForm=this.handleToggleForm.bind(this);
         this.closeForm=this.closeForm.bind(this);
         this.handleSearch=this.handleSearch.bind(this);
         this.handleSort=this.handleSort.bind(this);
         this.handleDelete=this.handleDelete.bind(this);
-        this.handleSubmit=this.handleSubmit.bind(this)
+        this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleEdit=this.handleEdit.bind(this);
     }
     handleSubmit(item){
-        console.log(item);
         let items = this.state.items;
-        items.push({
-             id      :uuidv4(),
-             name    :item.name,
-            level   :+item.level
-        })
-        this.setState({
-            items: items,
-            isShowForm: false
-        });
+        if(item.id !== ''){//edit
+            items.forEach((elm,key)=>{
+                if(elm.id === item.id){
+                    items[key].name=item.name;
+                    items[key].level = +item.level;
+                }
+            })
+        }else{
+            items.push({
+                 id      :uuidv4(),
+                 name    :item.name,
+                level   :+item.level
+            })
+        }
+            this.setState({
+                items: items,
+                isShowForm: false
+            });
+        
     }
 
 
@@ -51,6 +62,13 @@ class App extends Component {
         });
         this.setState({
             items: this.state.items
+        })
+    }
+
+    handleEdit(item){
+        this.setState({
+            itemSelected:item,
+            isShowForm:true
         })
     }
 
@@ -84,7 +102,7 @@ class App extends Component {
         let items =[];
         let isShowfForm = this.state.isShowForm;
         let elementForm = null;
-        let {orderBy, orderDir,stringSearch} =this.state;
+        let {orderBy, orderDir,stringSearch, itemSelected} =this.state;
 
         //Search
         items= filter(itemsOrigin,(item) => {
@@ -106,7 +124,7 @@ class App extends Component {
 
 
         if(isShowfForm){
-            elementForm = <Form onClickSubmit={this.handleSubmit} onClickCancel={this.closeForm}/>;
+            elementForm = <Form itemSelected={itemSelected} onClickSubmit={this.handleSubmit} onClickCancel={this.closeForm}/>;
         }
         
         return (
@@ -130,6 +148,7 @@ class App extends Component {
         
                 {/* FORM : END */}
                     <List
+                    onClickEdit ={this.handleEdit}
                     onClickDelete ={this.handleDelete}
                     items={items}/>
                 {/* LIST : START */}

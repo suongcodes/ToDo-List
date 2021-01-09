@@ -6,13 +6,30 @@ class Form extends Component {
         super(props);
 
         this.state = {
+            task_id:'',
             task_name:'',
             task_level:0
         };
+
+
         this.handleCancel = this.handleCancel.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        console.log(this.props.itemSelected);
     }
+
+    componentWillMount(){
+        let item = this.props.itemSelected;
+        if(item.id !== ''){
+            this.setState({
+                task_id:item.id,
+                task_name:item.name,
+                task_level:item.level
+            });
+        }
+    }
+
+
     handleCancel(){
        this.props.onClickCancel();
     }
@@ -32,12 +49,14 @@ class Form extends Component {
         let item ={
             name: this.state.task_name,
             level: this.state.task_level,
+            id:this.state.task_id,
         };
         this.props.onClickSubmit(item);
         event.preventDefault();
     }
 
     render() {
+        
         return (
                
             <div className="row">

@@ -9,9 +9,13 @@ class Item extends Component {
       
         };
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
     }
-
+    handleEdit(item){
+        this.props.onClickEdit(item);
+    }
     handleDelete(id){
+      
         this.props.onClickDelete(id);
     }
 
@@ -27,7 +31,7 @@ class Item extends Component {
                   {this.showElementLevel(item.level)}
                 </td>
                 <td>
-                    <button type="button" className="btn btn-warning">Chỉnh sửa</button>
+                    <button onClick={()=>this.handleEdit(item)} type="button" className="btn btn-warning">Chỉnh sửa</button>
                     <button onClick={()=>this.handleDelete(item.id)} type="button" className="btn btn-danger">Xóa</button>
                 </td>
         </tr>
