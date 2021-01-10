@@ -20,7 +20,7 @@ class Form extends Component {
 
     componentWillMount(){
         let item = this.props.itemSelected;
-        if(item.id !== ''){
+        if(item !== null){
             this.setState({
                 task_id:item.id,
                 task_name:item.name,
@@ -29,6 +29,16 @@ class Form extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        let item = nextProps.itemSelected;
+        if(item !== null){
+            this.setState({
+                task_id:item.id,
+                task_name:item.name,
+                task_level:item.level
+            });
+        }
+    }
 
     handleCancel(){
        this.props.onClickCancel();

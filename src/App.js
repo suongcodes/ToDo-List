@@ -3,8 +3,8 @@ import Title from './components/Title';
 import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
-import {filter,includes,orderBy as funcOrderBy, remove} from 'lodash';
-import tasks from './Mock/task';
+import {filter,includes,orderBy as funcOrderBy, remove,reject} from 'lodash';
+// import tasks from './Mock/task';
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -14,7 +14,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            items           : tasks,
+            items           : [],
             isShowForm      : false,
             stringSearch    : '',
             orderBy         : 'name',
@@ -29,40 +29,51 @@ class App extends Component {
         this.handleSubmit=this.handleSubmit.bind(this);
         this.handleEdit=this.handleEdit.bind(this);
     }
-    handleSubmit(item){
-        let items = this.state.items;
-        if(item.id !== ''){//edit
-            items.forEach((elm,key)=>{
-                if(elm.id === item.id){
-                    items[key].name=item.name;
-                    items[key].level = +item.level;
-                }
-            })
-        }else{
-            items.push({
-                 id      :uuidv4(),
-                 name    :item.name,
-                level   :+item.level
-            })
-        }
-            this.setState({
-                items: items,
-                isShowForm: false
-            });
-        
+
+    componentWillMount(){
+        let items = JSON.parse(localStorage.getItem('task')) || [] ;
+        this.setState({
+        items : items,
+    })
+        //luu vao localstorage
+       
     }
 
+    handleSubmit(item){
+        let items = this.state.items;
+        let id    = null;
+        if(item.id !== ''){//edit
+            items = reject(items, { id: item.id });
+            id = item.id;
+            
+        }else{
+          id= uuidv4();
+        }
 
+        items.push({
+            id      :id,
+            name    :item.name,
+           level   :+item.level
+       })
 
+       this.setState({
+           items: items,
+           isShowForm: false
+       });
+
+       localStorage.setItem('task',JSON.stringify(items));
+   }
 
     handleDelete(id){
-        console.log(id);
-        let items = remove(this.state.items, (item)=>{
+        let items = this.state.items;
+        remove(items, (item)=>{
             return item.id === id;
         });
         this.setState({
             items: this.state.items
         })
+
+        localStorage.setItem('task',JSON.stringify(items));
     }
 
     handleEdit(item){
@@ -81,7 +92,8 @@ class App extends Component {
 
     handleToggleForm(){
         this.setState({
-            isShowForm:!this.state.isShowForm
+            isShowForm:!this.state.isShowForm,
+            itemSelected:null
         });
     }
 
